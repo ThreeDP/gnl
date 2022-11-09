@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -108,7 +108,7 @@ char	*get_next_line(int fd)
 	t_list		*ret;
 	char		*line;
 	size_t		bsr;
-	static char	buffer[1024][BUFFER_SIZE];
+	static char	buffer[MAX_FD][BUFFER_SIZE];
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0))

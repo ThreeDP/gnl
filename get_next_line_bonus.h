@@ -14,13 +14,11 @@
 # define GET_NEXT_LINE_BONUS_H
 # include <unistd.h>
 # include <stdlib.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 100
 # endif
+# define MAX_FD 1024
 
 typedef struct a_list
 {
