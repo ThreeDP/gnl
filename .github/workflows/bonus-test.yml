@@ -1,0 +1,12 @@
+name: bonus
+on: [push]
+jobs:
+  bonus-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: gnlTester
+    steps:
+    - uses: actions/checkout@v2
+    - name: bonus
+      run: make b

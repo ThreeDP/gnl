@@ -1,0 +1,12 @@
+name: mandatory
+on: [push]
+jobs:
+  mandatory-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: gnlTester
+    steps:
+    - uses: actions/checkout@v2
+    - name: mandatory
+      run: make m
