@@ -82,7 +82,8 @@ static size_t	make_pieces(int fd, char *buffer, t_list **lst, size_t bsr)
 	line_size = 0;
 	while (1)
 	{
-		if ((c_pos = ft_strchr(buffer, '\n')))
+		c_pos = ft_strchr(buffer, '\n');
+		if (c_pos)
 		{
 			(*lst)->content = ft_strdup(buffer, (c_pos - buffer) + 1);
 			ft_strlcpy(tmp, &buffer[(c_pos - buffer) + 1], BUFFER_SIZE);
