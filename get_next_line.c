@@ -117,13 +117,10 @@ char	*get_next_line(int fd)
 	if (!lst)
 		return (NULL);
 	ret = lst;
-	if (!ft_strlen(buffer))
-	{
+	bsr = ft_strlen(buffer);
+	if (!bsr)
 		bsr = read(fd, buffer, BUFFER_SIZE);
-		buffer[bsr] = '\0';
-	}
-	else
-		bsr = ft_strlen(buffer);
+	buffer[bsr] = '\0';
 	bsr = make_pieces(fd, buffer, &lst, bsr);
 	if (bsr)
 		line = create_line(&ret, bsr);
