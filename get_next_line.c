@@ -77,7 +77,7 @@ static size_t	make_pieces(int fd, char *buffer, t_list **lst, size_t bsr)
 {
 	size_t	line_size;
 	char	*c_pos;
-	char	tmp[BUFFER_SIZE];
+	char	*tmp;
 
 	line_size = 0;
 	while (1)
@@ -86,8 +86,9 @@ static size_t	make_pieces(int fd, char *buffer, t_list **lst, size_t bsr)
 		if (c_pos)
 		{
 			(*lst)->content = ft_strdup(buffer, (c_pos - buffer) + 1);
-			ft_strlcpy(tmp, &buffer[(c_pos - buffer) + 1], BUFFER_SIZE);
+			tmp = ft_strdup(&buffer[(c_pos - buffer) + 1], ft_strlen(&buffer[(c_pos - buffer) + 1]));
 			ft_strlcpy(buffer, tmp, ft_strlen(tmp) + 1);
+			free(tmp);
 			return (line_size += (c_pos - buffer) + 1);
 		}
 		line_size += bsr;
@@ -108,14 +109,20 @@ char	*get_next_line(int fd)
 	t_list		*ret;
 	char		*line;
 	size_t		bsr;
-	static char	buffer[BUFFER_SIZE];
+	static char	*buffer;
 
 	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0))
 		return (NULL);
+	if (!buffer)
+	{
+		buffer = (char *) calloc(BUFFER_SIZE + 1, sizeof(char));
+		if (!buffer)
+			return (NULL);
+	}
 	lst = ft_lstnew(NULL);
 	if (!lst)
-		return (NULL);
+		return (free(buffer), NULL);
 	ret = lst;
 	bsr = ft_strlen(buffer);
 	if (!bsr)
