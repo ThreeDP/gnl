@@ -14,11 +14,13 @@
 # define GET_NEXT_LINE_BONUS_H
 # include <unistd.h>
 # include <stdlib.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 100
 # endif
-# define MAX_FD 1024
 
 typedef struct a_list
 {
@@ -34,7 +36,7 @@ size_t		ft_strlcat(char *dst, const char *src, size_t size);
 char		*ft_strdup(const char *s, size_t size);
 // List Manipulation
 t_list		*ft_lstnew(char *content);
-void		ft_lstadd_back(t_list **lst, t_list *new);
+void		ft_lstadd_back(t_list **lst, int creat_lst);
 void		ft_lstclear(t_list **lst, void (*del)(void *));
 // GNL Actions
 char		*get_next_line(int fd);
